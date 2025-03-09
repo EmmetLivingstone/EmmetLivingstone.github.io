@@ -1,0 +1,515 @@
+/* Reset and Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: #333;
+    overflow-x: hidden;
+    background-color: #f0f0f0;
+}
+
+/* Left Sidebar */
+#sidebar {
+    width: 180px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #e8e8e8;
+    padding: 40px 15px;
+    border-right: none; /* Remove the hard border */
+    box-shadow: 5px 0 15px -10px rgba(0, 0, 0, 0.05); /* Very subtle shadow */
+}
+
+.sidebar-header {
+    margin-bottom: 50px;
+}
+
+.sidebar-header h1 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.sidebar-nav {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-nav li {
+    margin-bottom: 15px;
+}
+
+.sidebar-nav a {
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+    transition: color 0.3s;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+    color: #333;
+    font-weight: 500;
+}
+
+.social-links {
+    position: absolute;
+    bottom: 40px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.social-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #dcdedd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s;
+}
+
+.social-btn:hover {
+    background: #d0d3d0;
+    color: #333;
+    transform: translateY(-3px);
+}
+
+/* Main Content */
+#main-content {
+    margin-left: 180px;
+    padding: 0 40px 40px 40px; /* Remove top padding entirely */
+    min-height: 100vh;
+    background: #f0f0f0;
+    position: relative;
+}
+
+/* Gradient transition between sidebar and main content */
+#main-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 20px;
+    background: linear-gradient(to right, #e8e8e8, #f0f0f0);
+    z-index: -1;
+}
+
+.content-section {
+    display: none;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-top: 145px; /* Move padding to content section for better control */
+}
+
+.content-section.active {
+    display: block;
+}
+
+/* Two-column layout for Selected Reporting */
+.publication-group {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+    align-items: baseline;
+}
+
+.publication-group:first-child {
+    margin-top: 0; /* Ensure the first publication starts at the top of the section */
+}
+
+.publication-title {
+    grid-column: 1;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+    border-bottom: none;
+    position: sticky;
+    top: 40px;
+    align-self: start;
+    padding-top: 0;
+    margin-top: 0;
+    background-color: transparent;
+}
+
+.article-list {
+    grid-column: 2;
+    list-style: none;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.article-item:first-child {
+    margin-top: 0;
+}
+
+.article-item {
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: none;
+}
+
+.article-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.article-title {
+    font-size: 15px;
+    margin-bottom: 3px;
+    font-weight: 500;
+}
+
+.article-title a {
+    text-decoration: none;
+    color: #333;
+}
+
+.article-title a:hover {
+    color: #333;
+}
+
+.article-meta,
+.radio-meta,
+.video-meta {
+    color: #666;
+    font-size: 13px;
+}
+
+/* Country subsections styling */
+.country-subsection {
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.country-title {
+    font-size: 14px;
+    margin-bottom: 12px;
+    font-weight: 600;
+    color: #444;
+}
+
+.country-subsection, 
+.collapsed-publication {
+    display: none;
+    margin-top: 10px;
+}
+
+.country-subsection.expanded, 
+.collapsed-publication.expanded {
+    display: block;
+}
+
+.dropdown-button, 
+.publication-dropdown {
+    background-color: transparent;
+    border: none;
+    color: #444;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    font-family: 'Playfair Display', Georgia, serif;
+    text-align: left;
+    grid-column: 1;
+    margin-top: 15px;
+}
+
+.dropdown-button::after, 
+.publication-dropdown::after {
+    content: "▼";
+    font-size: 10px;
+    margin-left: 6px;
+}
+
+.dropdown-button.expanded::after, 
+.publication-dropdown.expanded::after {
+    content: "▲";
+}
+
+/* Ensure expanded country subsections are visible by default */
+.country-subsection.expanded {
+    display: block;
+}
+
+/* Publication title dropdown */
+.dropdown-title {
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.dropdown-title::after {
+    content: "▼";
+    font-size: 10px;
+    margin-left: 6px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.dropdown-title.expanded::after {
+    content: "▲";
+}
+
+/* Radio Page Styles */
+.radio-list {
+    list-style: none;
+}
+
+.radio-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: none;
+}
+
+.radio-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.radio-title {
+    font-size: 15px;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.radio-title a {
+    text-decoration: none;
+    color: #333;
+}
+
+.radio-title a:hover {
+    color: #333;
+}
+
+.radio-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+audio {
+    width: 100%;
+}
+
+/* Inline Audio Player */
+.inline-player {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+    max-width: 400px;
+}
+
+.play-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+
+.play-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.play-btn svg {
+    width: 12px;
+    height: 12px;
+    fill: #333;
+}
+
+.progress-container {
+    flex-grow: 1;
+    height: 4px;
+    background-color: #e0e0e0;
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #999;
+    border-radius: 2px;
+    width: 0;
+    transition: width 0.1s linear;
+}
+
+.time-display {
+    font-size: 12px;
+    color: #666;
+    min-width: 70px;
+    text-align: right;
+}
+
+/* Radio section title */
+.radio-section-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* TV Page Styles */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.video-item {
+    margin-bottom: 20px;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.video-container img,
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-title {
+    font-size: 15px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+/* About Page Styles */
+.about-content {
+    line-height: 1.8;
+}
+
+.about-image {
+    float: right;
+    margin: 0 0 20px 40px;
+    max-width: 300px;
+    border-radius: 4px;
+}
+
+.about-content p {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+    
+    #sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 20px;
+        border-right: none;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .sidebar-header {
+        margin-bottom: 20px;
+    }
+    
+    .sidebar-nav {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .sidebar-nav li {
+        margin-bottom: 0;
+    }
+    
+    .social-links {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin-top: 20px;
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    #main-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+    
+    .content-section {
+        padding-top: 0;
+    }
+    
+    .about-image {
+        float: none;
+        margin: 0 0 20px 0;
+        max-width: 100%;
+    }
+    
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .article-meta,
+    .radio-meta {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .publication-group {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .publication-title {
+        grid-column: 1;
+        position: static;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .article-list {
+        grid-column: 1;
+    }
+    
+    .dropdown-button {
+        grid-column: 1;
+    }
+}
