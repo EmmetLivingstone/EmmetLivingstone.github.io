@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize carousel
+    initArticleCarousel();
+    
     // Navigation functionality
-    const navLinks = document.querySelectorAll('.sidebar-nav a');
+    const navLinks = document.querySelectorAll('.sidebar-nav a, .home-link');
     const contentSections = document.querySelectorAll('.content-section');
     
     navLinks.forEach(link => {
@@ -8,11 +11,16 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             
             // Remove active class from all links and sections
-            navLinks.forEach(l => l.classList.remove('active'));
+            navLinks.forEach(l => {
+                if (l.classList.contains('home-link')) return; // Skip home link styling
+                l.classList.remove('active');
+            });
             contentSections.forEach(s => s.classList.remove('active'));
             
             // Add active class to clicked link
-            this.classList.add('active');
+            if (!this.classList.contains('home-link')) {
+                this.classList.add('active');
+            }
             
             // Show corresponding section
             const sectionId = this.getAttribute('data-section');
@@ -109,6 +117,135 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
             });
+        });
+    }
+    
+    // Article Carousel Functionality
+    function initArticleCarousel() {
+        const track = document.querySelector('.carousel-track');
+        const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+        const paginationContainer = document.querySelector('.carousel-pagination');
+        
+        if (!track || slides.length === 0) return;
+        
+        let currentIndex = 0;
+        let autoplayInterval;
+        
+        // Create pagination dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('pagination-dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                moveToSlide(index);
+                resetAutoplay();
+            });
+            paginationContainer.appendChild(dot);
+        });
+        
+        // Mark the initial slide as active
+        slides[0].classList.add('active');
+        
+        // Update pagination dots and slide active states
+        function updateIndicators() {
+            // Update pagination dots
+            const dots = document.querySelectorAll('.pagination-dot');
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+            
+            // Update slide active state
+            slides.forEach((slide, index) => {
+                if (index === currentIndex) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+        }
+        
+        // Move to specific slide
+        function moveToSlide(targetIndex) {
+            if (targetIndex < 0) {
+                targetIndex = slides.length - 1;
+            } else if (targetIndex >= slides.length) {
+                targetIndex = 0;
+            }
+            
+            // Get the width dynamically in case of window resizing
+            const slideWidth = slides[0].getBoundingClientRect().width;
+            
+            currentIndex = targetIndex;
+            track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+            updateIndicators();
+        }
+        
+        // Autoplay functionality
+        function startAutoplay() {
+            autoplayInterval = setInterval(() => {
+                moveToSlide(currentIndex + 1);
+            }, 5000); // Change slide every 5 seconds
+        }
+        
+        function resetAutoplay() {
+            clearInterval(autoplayInterval);
+            startAutoplay();
+        }
+        
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        track.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        
+        track.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+        
+        function handleSwipe() {
+            const diff = touchStartX - touchEndX;
+            const threshold = 50; // Minimum swipe distance
+            
+            if (Math.abs(diff) < threshold) return;
+            
+            if (diff > 0) {
+                // Swiped left - go to next slide
+                moveToSlide(currentIndex + 1);
+            } else {
+                // Swiped right - go to previous slide
+                moveToSlide(currentIndex - 1);
+            }
+            
+            resetAutoplay();
+        }
+        
+        // Pause autoplay when hovering over carousel
+        track.addEventListener('mouseenter', () => {
+            clearInterval(autoplayInterval);
+        });
+        
+        track.addEventListener('mouseleave', () => {
+            startAutoplay();
+        });
+        
+        // Start autoplay
+        startAutoplay();
+        
+        // Handle window resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                const newSlideWidth = slides[0].getBoundingClientRect().width;
+                track.style.transform = `translateX(-${currentIndex * newSlideWidth}px)`;
+            }, 200);
         });
     }
 });
