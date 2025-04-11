@@ -710,4 +710,22 @@ audio {
     width: 8px;
     height: 8px;
     margin: 0 6px;
+}/* Ensure sections completely replace each other */
+.content-section {
+    display: none !important; /* Force hiding */
+}
+
+.content-section.active {
+    display: block !important; /* Force showing */
+}
+
+/* Fix spacing for each section */
+#article-showcase {
+    padding-top: 80px;
+}
+
+#selected-reporting,
+#radio,
+#about {
+    padding-top: 60px;
 }
