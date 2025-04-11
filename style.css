@@ -130,13 +130,21 @@ body {
 
 /* Section Specific Spacing */
 #article-showcase {
-    padding-top: 80px;
+    padding-top: 0;
+    margin-top: 153px; /* Aligns with "Selected reporting" */
 }
 
 #selected-reporting,
 #radio,
 #about {
-    padding-top: 145px;
+    padding-top: 0;
+    margin-top: 153px; /* Aligns with "Selected reporting" */
+}
+
+/* For the carousel container */
+.carousel-container {
+    margin-top: 0;
+    margin-bottom: 60px;
 }
 
 /* Carousel Styles */
