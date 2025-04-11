@@ -21,8 +21,8 @@
     <!-- Left Sidebar -->
     <aside id="sidebar">
         <div class="sidebar-header">
-            <h1>Emmet Livingstone</h1>
-        </div>
+    <h1><a href="#" data-section="article-showcase" class="home-link">Emmet Livingstone</a></h1>
+</div>
         
         <ul class="sidebar-nav">
             <li><a href="#" class="active" data-section="selected-reporting">Selected reporting</a></li>
@@ -53,9 +53,51 @@
     </aside>
 
     <!-- Main Content Area -->
-    <main id="main-content">
+<main id="main-content">
+<!-- Article Screenshots Carousel - New Landing Page -->
+<section id="article-showcase" class="content-section active">
+    <div class="carousel-container">
+        <!-- Carousel Slides - Each contains a screenshot of a published article -->
+        <div class="carousel-track">
+            <!-- Economist Article - Congo Crisis -->
+            <div class="carousel-slide">
+                <a href="https://www.economist.com/middle-east-and-africa/2024/02/22/congos-m23-rebellion-risks-sparking-a-regional-war" class="article-screenshot">
+                    <img src="https://github.com/EmmetLivingstone/EmmetLivingstone.github.io/blob/main/Pictures/Congo%20Calling%20Landing%20Page.png" alt="The Economist: Congo crisis">
+                </a>
+            </div>
+            
+            <!-- Guardian Article - Wildlife Reserve -->
+            <div class="carousel-slide">
+                <a href="https://www.theguardian.com/global-development/2025/mar/14/failed-role-western-mercenaries-fall-of-goma-drc" class="article-screenshot">
+                    <img src="https://github.com/EmmetLivingstone/EmmetLivingstone.github.io/blob/main/Pictures/Guardian%20mercs%20landing%20page.png" alt="Supermarket guards, truck drivers and ‘very big mistakes’: the failed role of western mercenaries in the fall of Goma">
+                </a>
+            </div>
+            
+            <!-- Science Article - Forest -->
+            <div class="carousel-slide">
+                <a href="https://www.science.org/content/article/long-term-survival-congo-biodiversity-threatened-lack-local-scientists" class="article-screenshot">
+                    <img src="https://github.com/EmmetLivingstone/EmmetLivingstone.github.io/blob/main/Pictures/Congo%20Calling%20Landing%20Page.png" alt="Congo calling: A dearth of local scientists is holding back research on the world's second largest rainforest">
+                </a>
+            </div>
+        </div>
+
+       <!-- The Dial Article - Implosion -->
+            <div class="carousel-slide">
+                <a href="https://www.thedial.world/articles/news/issue-26/congo-goma-m23-rebels" class="article-screenshot">
+                    <img src="https://github.com/EmmetLivingstone/EmmetLivingstone.github.io/blob/main/Pictures/The%20Dial%20Landing%20Page.png" alt="Congo’s Implosion">
+                </a>
+            </div>
+        </div>
+        
+        <!-- Pagination Indicators -->
+        <div class="carousel-pagination">
+            <!-- Will be populated by JavaScript -->
+        </div>
+    </div>
+</section>
+
 <!-- Selected Reporting Page with Aligned Two-Column Layout -->
-<section id="selected-reporting" class="content-section active">
+<section id="selected-reporting" class="content-section">
     <!-- The Economist Articles -->
     <div class="publication-group">
         <h2 class="publication-title">The Economist</h2>
