@@ -128,9 +128,14 @@ body {
     display: block;
 }
 
-/* Section Specific Spacing - FIX: All content aligns with "Selected reporting" */
-#article-showcase {
+/* Section Specific Spacing - Fix alignment */
+#article-showcase, 
+#selected-reporting,
+#radio,
+#about,
+#tv {
     padding-top: 40px;
+    margin-top: 0;
 }
 
 #selected-reporting,
