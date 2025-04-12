@@ -3,7 +3,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const isLandingPage = document.getElementById('article-showcase').classList.contains('active');
     if (isLandingPage) {
         document.body.classList.add('landing-page');
+        document.getElementById('article-showcase').style.height = '100vh';
+        document.getElementById('article-showcase').style.overflow = 'hidden';
     }
+    
+    // Fix section alignment immediately on page load
+    document.querySelectorAll('.content-section').forEach(section => {
+        section.style.paddingTop = '40px';
+        section.style.marginTop = '0';
+    });
+    
+    // Fix pagination dots immediately on page load
+    setTimeout(() => {
+        document.querySelectorAll('.pagination-dot').forEach(dot => {
+            dot.style.width = '6px';
+            dot.style.height = '6px';
+            dot.style.margin = '0';
+        });
+    }, 100);
     
     // Initialize carousel
     initArticleCarousel();
@@ -38,9 +55,28 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add or remove landing-page class based on section
             if (sectionId === 'article-showcase') {
                 document.body.classList.add('landing-page');
+                document.getElementById('article-showcase').style.height = '100vh';
+                document.getElementById('article-showcase').style.overflow = 'hidden';
             } else {
                 document.body.classList.remove('landing-page');
+                document.getElementById('article-showcase').style.height = '';
+                document.getElementById('article-showcase').style.overflow = '';
             }
+            
+            // Ensure proper alignment for all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.paddingTop = '40px';
+                section.style.marginTop = '0';
+            });
+            
+            // Fix pagination dots after nav change
+            setTimeout(() => {
+                document.querySelectorAll('.pagination-dot').forEach(dot => {
+                    dot.style.width = '6px';
+                    dot.style.height = '6px';
+                    dot.style.margin = '0';
+                });
+            }, 100);
         });
     });
     
@@ -70,69 +106,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize audio players
     initFallbackDurations();
     
-    // Publication nav functionality for the two-column layout
-    const pubNavLinks = document.querySelectorAll('.publication-nav-link');
-    
-    if (pubNavLinks.length > 0) {
-        // Function to update active publication
-        function updateActivePublication() {
-            // Get current scroll position
-            const scrollPosition = window.scrollY + 100; // Add offset for better UX
-            
-            // Find which section is currently in view
-            const articleSections = document.querySelectorAll('.article-section');
-            let currentSection = null;
-            
-            articleSections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionBottom = sectionTop + section.offsetHeight;
-                
-                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                    currentSection = section;
-                }
-            });
-            
-            // If we found a section in view, update the active link
-            if (currentSection) {
-                const sectionId = currentSection.id;
-                
-                // Remove active class from all links
-                pubNavLinks.forEach(link => {
-                    link.classList.remove('active');
-                });
-                
-                // Add active class to the corresponding link
-                const activeLink = document.querySelector(`.publication-nav-link[href="#${sectionId}"]`);
-                if (activeLink) {
-                    activeLink.classList.add('active');
-                }
-            }
-        }
-        
-        // Initial update
-        updateActivePublication();
-        
-        // Update on scroll
-        window.addEventListener('scroll', updateActivePublication);
-        
-        // Handle click on publication links
-        pubNavLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
-                
-                if (targetSection) {
-                    window.scrollTo({
-                        top: targetSection.offsetTop - 40,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    }
-    
     // Article Carousel Functionality
     function initArticleCarousel() {
         const track = document.querySelector('.carousel-track');
@@ -148,6 +121,10 @@ document.addEventListener('DOMContentLoaded', function() {
         slides.forEach((_, index) => {
             const dot = document.createElement('div');
             dot.classList.add('pagination-dot');
+            dot.style.width = '6px';
+            dot.style.height = '6px';
+            dot.style.margin = '0';
+            
             if (index === 0) dot.classList.add('active');
             dot.addEventListener('click', () => {
                 moveToSlide(index);
@@ -258,6 +235,23 @@ document.addEventListener('DOMContentLoaded', function() {
             resizeTimer = setTimeout(() => {
                 const newSlideWidth = slides[0].getBoundingClientRect().width;
                 track.style.transform = `translateX(-${currentIndex * newSlideWidth}px)`;
+                
+                // Reapply fixed styles after resize
+                document.querySelectorAll('.pagination-dot').forEach(dot => {
+                    dot.style.width = '6px';
+                    dot.style.height = '6px';
+                    dot.style.margin = '0';
+                });
+                
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.style.paddingTop = '40px';
+                    section.style.marginTop = '0';
+                });
+                
+                if (document.getElementById('article-showcase').classList.contains('active')) {
+                    document.getElementById('article-showcase').style.height = '100vh';
+                    document.getElementById('article-showcase').style.overflow = 'hidden';
+                }
             }, 200);
         });
     }
@@ -436,38 +430,3 @@ function parseTime(timeString) {
     }
     return 180; // Fallback to 3 minutes
 }
-
-// Force fix important styling issues
-document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('.sidebar-nav a, .home-link');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            const sectionId = this.getAttribute('data-section');
-            
-            // Fix landing page scrolling
-            if (sectionId === 'article-showcase') {
-                document.body.style.overflow = 'hidden';
-                document.getElementById('article-showcase').style.overflow = 'hidden';
-                document.getElementById('article-showcase').style.height = '100vh';
-            } else {
-                document.body.style.overflow = '';
-                document.getElementById('article-showcase').style.overflow = '';
-                document.getElementById('article-showcase').style.height = '';
-            }
-            
-            // Fix section alignment
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.style.paddingTop = '40px';
-                section.style.marginTop = '0';
-            });
-        });
-    });
-    
-    // Fix pagination dots
-    document.querySelectorAll('.pagination-dot').forEach(dot => {
-        dot.style.width = '6px';
-        dot.style.height = '6px';
-        dot.style.margin = '0';
-    });
-});
