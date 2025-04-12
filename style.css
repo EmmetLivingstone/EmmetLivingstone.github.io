@@ -12,6 +12,11 @@ body {
     background-color: #f0f0f0;
 }
 
+/* Prevent scrolling on landing page */
+body.landing-page {
+    overflow: hidden !important;
+}
+
 /* Left Sidebar */
 #sidebar {
     width: 180px;
@@ -128,31 +133,21 @@ body {
     display: block;
 }
 
-/* Section Specific Spacing - Fix alignment */
+/* Section Specific Spacing - Fix alignment issues */
 #article-showcase, 
 #selected-reporting,
 #radio,
 #about,
 #tv {
-    padding-top: 40px;
-    margin-top: 0;
+    padding-top: 40px !important;
+    margin-top: 0 !important;
 }
 
-#selected-reporting,
-#radio,
-#about,
-#tv {
-    padding-top: 40px;
-}
-
-/* FIX: Prevent scrolling on landing page */
-body.landing-page {
-    overflow: hidden;
-}
-
+/* Landing page specific */
 #article-showcase.active {
-    height: calc(100vh - 80px);
-    overflow: hidden;
+    height: 100vh !important;
+    overflow: hidden !important;
+    margin-top: 0 !important;
 }
 
 /* For the carousel container */
@@ -201,7 +196,7 @@ body.landing-page {
     max-height: 75vh;
 }
 
-/* Pagination Indicators - smaller, more discreet dots */
+/* Pagination Indicators - Fixed smaller, more discreet dots */
 .carousel-pagination {
     display: flex;
     justify-content: center;
@@ -210,13 +205,13 @@ body.landing-page {
 }
 
 .pagination-dot {
-    width: 6px;
-    height: 6px;
+    width: 6px !important;
+    height: 6px !important;
     border-radius: 50%;
     background-color: #ddd;
     cursor: pointer;
     transition: all 0.3s;
-    margin: 0;
+    margin: 0 !important;
 }
 
 .pagination-dot.active {
@@ -656,13 +651,4 @@ audio {
     .dropdown-button {
         grid-column: 1;
     }
-
-/* Prevent scrolling on landing page */
-#article-showcase.active {
-    height: 100vh;
-    overflow: hidden;
-}
-
-body:has(#article-showcase.active) {
-    overflow: hidden;
 }
