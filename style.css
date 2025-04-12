@@ -652,3 +652,17 @@ audio {
         grid-column: 1;
     }
 }
+
+/* Set consistent top padding for all content sections */
+#selected-reporting,
+#radio,
+#about {
+  padding-top: 153px !important; /* This matches the distance from the top to the "Selected reporting" menu item */
+  margin-top: 0 !important;
+}
+
+/* For the landing page, maintain the same vertical positioning */
+#article-showcase {
+  padding-top: 153px !important;
+  margin-top: 0 !important;
+}
