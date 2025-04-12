@@ -196,12 +196,12 @@ body.landing-page {
     max-height: 75vh;
 }
 
-/* Pagination Indicators - FIX: Smaller, more discreet dots */
+/* Pagination Indicators - smaller, more discreet dots */
 .carousel-pagination {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-    gap: 10px;
+    gap: 8px;
 }
 
 .pagination-dot {
@@ -211,7 +211,7 @@ body.landing-page {
     background-color: #ddd;
     cursor: pointer;
     transition: all 0.3s;
-    margin: 0 5px;
+    margin: 0;
 }
 
 .pagination-dot.active {
