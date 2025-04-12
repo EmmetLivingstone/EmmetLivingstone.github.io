@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Check if on landing page and add class to body to prevent scrolling
+    const isLandingPage = document.getElementById('article-showcase').classList.contains('active');
+    if (isLandingPage) {
+        document.body.classList.add('landing-page');
+    }
+    
     // Initialize carousel
     initArticleCarousel();
     
@@ -28,6 +34,13 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Update URL hash
             window.location.hash = this.getAttribute('href');
+            
+            // Add or remove landing-page class based on section
+            if (sectionId === 'article-showcase') {
+                document.body.classList.add('landing-page');
+            } else {
+                document.body.classList.remove('landing-page');
+            }
         });
     });
     
