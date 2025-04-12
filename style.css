@@ -675,3 +675,22 @@ audio {
         grid-column: 1;
     }
 }
+
+/* Add only these lines to your style.css file to center the carousel */
+
+/* Landing page specific - CENTER THE CAROUSEL VERTICALLY */
+#article-showcase.active {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100vh !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* For better mobile display */
+@media (max-width: 768px) {
+    #article-showcase.active {
+        height: calc(100vh - 150px) !important;
+    }
+}
