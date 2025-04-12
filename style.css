@@ -651,4 +651,13 @@ audio {
     .dropdown-button {
         grid-column: 1;
     }
+
+/* Prevent scrolling on landing page */
+#article-showcase.active {
+    height: 100vh;
+    overflow: hidden;
+}
+
+body:has(#article-showcase.active) {
+    overflow: hidden;
 }
