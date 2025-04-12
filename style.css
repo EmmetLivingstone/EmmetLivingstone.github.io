@@ -128,17 +128,26 @@ body {
     display: block;
 }
 
-/* Section Specific Spacing */
+/* Section Specific Spacing - FIX: All content aligns with "Selected reporting" */
 #article-showcase {
-    padding-top: 0;
-    margin-top: 153px; /* Aligns with "Selected reporting" */
+    padding-top: 40px;
 }
 
 #selected-reporting,
 #radio,
-#about {
-    padding-top: 0;
-    margin-top: 153px; /* Aligns with "Selected reporting" */
+#about,
+#tv {
+    padding-top: 40px;
+}
+
+/* FIX: Prevent scrolling on landing page */
+body.landing-page {
+    overflow: hidden;
+}
+
+#article-showcase.active {
+    height: calc(100vh - 80px);
+    overflow: hidden;
 }
 
 /* For the carousel container */
@@ -187,7 +196,7 @@ body {
     max-height: 75vh;
 }
 
-/* Pagination Indicators */
+/* Pagination Indicators - FIX: Smaller, more discreet dots */
 .carousel-pagination {
     display: flex;
     justify-content: center;
@@ -196,18 +205,18 @@ body {
 }
 
 .pagination-dot {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background-color: #ddd;
     cursor: pointer;
     transition: all 0.3s;
-    margin: 0 6px;
+    margin: 0 5px;
 }
 
 .pagination-dot.active {
     background-color: #666;
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 /* Two-column layout for Selected Reporting */
