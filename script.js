@@ -3,6 +3,63 @@ document.addEventListener('DOMContentLoaded', function() {
     const isLandingPage = document.getElementById('article-showcase').classList.contains('active');
     if (isLandingPage) {
         document.body.classList.add('landing-page');
+    } else {
+        document.body.classList.remove('landing-page');
+    }
+    
+    // Initialize carousel
+    initArticleCarousel();
+    
+    // Navigation functionality
+    const navLinks = document.querySelectorAll('.sidebar-nav a, .home-link');
+    const contentSections = document.querySelectorAll('.content-section');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove active class from all links and sections
+            navLinks.forEach(l => {
+                if (l.classList.contains('home-link')) return; // Skip home link styling
+                l.classList.remove('active');
+            });
+            contentSections.forEach(s => s.classList.remove('active'));
+            
+            // Add active class to clicked link
+            if (!this.classList.contains('home-link')) {
+                this.classList.add('active');
+            }
+            
+            // Show corresponding section
+            const sectionId = this.getAttribute('data-section');
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update URL hash
+            window.location.hash = this.getAttribute('href');
+            
+            // Add or remove landing-page class based on section
+            if (sectionId === 'article-showcase') {
+                document.body.classList.add('landing-page');
+            } else {
+                document.body.classList.remove('landing-page');
+            }
+            
+            // Fix pagination dots right after navigation
+            setTimeout(() => {
+                document.querySelectorAll('.pagination-dot').forEach(dot => {
+                    dot.style.width = '6px';
+                    dot.style.height = '6px';
+                    dot.style.margin = '0';
+                });
+            }, 100);
+        });
+    });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if on landing page and add class to body to prevent scrolling
+    const isLandingPage = document.getElementById('article-showcase').classList.contains('active');
+    if (isLandingPage) {
+        document.body.classList.add('landing-page');
         document.getElementById('article-showcase').style.height = '100vh';
         document.getElementById('article-showcase').style.overflow = 'hidden';
     }
