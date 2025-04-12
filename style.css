@@ -133,6 +133,18 @@ body.landing-page {
     display: block;
 }
 
+/* CRITICAL FIX: Ensure only one section is active at a time */
+body:not(.landing-page) #article-showcase {
+    display: none !important;
+}
+
+body.landing-page #selected-reporting,
+body.landing-page #radio,
+body.landing-page #about,
+body.landing-page #tv {
+    display: none !important;
+}
+
 /* Section Specific Spacing */
 #selected-reporting,
 #radio,
