@@ -14,7 +14,7 @@ body {
 
 /* Prevent scrolling on landing page */
 body.landing-page {
-    overflow: hidden !important;
+    overflow: hidden;
 }
 
 /* Left Sidebar */
@@ -133,20 +133,11 @@ body.landing-page {
     display: block;
 }
 
-/* Section Specific Spacing - Fix alignment issues */
-#article-showcase, 
+/* Section Specific Spacing */
 #selected-reporting,
 #radio,
-#about,
-#tv {
-    padding-top: 40px !important;
-    margin-top: 0 !important;
-}
-
-/* Landing page specific */
-#article-showcase.active {
-    height: 100vh !important;
-    overflow: hidden !important;
+#about {
+    padding-top: 153px !important; /* Match to "Selected reporting" menu height */
     margin-top: 0 !important;
 }
 
@@ -154,6 +145,20 @@ body.landing-page {
 .carousel-container {
     margin-top: 0;
     margin-bottom: 60px;
+}
+
+/* Landing page specific - CENTER THE CONTENT VERTICALLY */
+#article-showcase {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+#article-showcase.active {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100vh !important;
+    overflow: hidden !important;
 }
 
 /* Carousel Styles */
@@ -205,13 +210,13 @@ body.landing-page {
 }
 
 .pagination-dot {
-    width: 6px !important;
-    height: 6px !important;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background-color: #ddd;
     cursor: pointer;
     transition: all 0.3s;
-    margin: 0 !important;
+    margin: 0;
 }
 
 .pagination-dot.active {
@@ -609,11 +614,17 @@ audio {
         padding: 20px;
     }
     
-    #article-showcase,
+    /* Adjust mobile spacing */
     #selected-reporting,
     #radio,
     #about {
-        padding-top: 30px;
+        padding-top: 30px !important;
+    }
+    
+    /* Center landing page content on mobile too */
+    #article-showcase.active {
+        height: calc(100vh - 150px) !important;
+        padding-top: 0 !important;
     }
     
     .about-image {
@@ -651,43 +662,4 @@ audio {
     .dropdown-button {
         grid-column: 1;
     }
-}
-
-/* Set consistent top padding for all content sections */
-#selected-reporting,
-#radio,
-#about {
-  padding-top: 153px !important; /* This matches the distance from the top to the "Selected reporting" menu item */
-  margin-top: 0 !important;
-}
-
-/* For the landing page, maintain the same vertical positioning */
-#article-showcase {
-  padding-top: 153px !important;
-  margin-top: 0 !important;
-}
-/* Add this to your style.css file */
-
-/* Special handling for the landing page content */
-#article-showcase {
-  padding-top: 0 !important; /* Remove the top padding we set earlier */
-  margin-top: 0 !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh !important; /* Full viewport height */
-}
-
-/* Make sure the carousel container centers properly */
-#article-showcase .carousel-container {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-/* Keep the vertical padding for other content sections */
-#selected-reporting,
-#radio,
-#about {
-  padding-top: 153px !important;
-  margin-top: 0 !important;
 }
