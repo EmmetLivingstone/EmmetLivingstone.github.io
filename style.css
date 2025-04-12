@@ -666,3 +666,28 @@ audio {
   padding-top: 153px !important;
   margin-top: 0 !important;
 }
+/* Add this to your style.css file */
+
+/* Special handling for the landing page content */
+#article-showcase {
+  padding-top: 0 !important; /* Remove the top padding we set earlier */
+  margin-top: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh !important; /* Full viewport height */
+}
+
+/* Make sure the carousel container centers properly */
+#article-showcase .carousel-container {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Keep the vertical padding for other content sections */
+#selected-reporting,
+#radio,
+#about {
+  padding-top: 153px !important;
+  margin-top: 0 !important;
+}
