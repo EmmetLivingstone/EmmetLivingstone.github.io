@@ -436,3 +436,38 @@ function parseTime(timeString) {
     }
     return 180; // Fallback to 3 minutes
 }
+
+// Force fix important styling issues
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.sidebar-nav a, .home-link');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            const sectionId = this.getAttribute('data-section');
+            
+            // Fix landing page scrolling
+            if (sectionId === 'article-showcase') {
+                document.body.style.overflow = 'hidden';
+                document.getElementById('article-showcase').style.overflow = 'hidden';
+                document.getElementById('article-showcase').style.height = '100vh';
+            } else {
+                document.body.style.overflow = '';
+                document.getElementById('article-showcase').style.overflow = '';
+                document.getElementById('article-showcase').style.height = '';
+            }
+            
+            // Fix section alignment
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.paddingTop = '40px';
+                section.style.marginTop = '0';
+            });
+        });
+    });
+    
+    // Fix pagination dots
+    document.querySelectorAll('.pagination-dot').forEach(dot => {
+        dot.style.width = '6px';
+        dot.style.height = '6px';
+        dot.style.margin = '0';
+    });
+});
