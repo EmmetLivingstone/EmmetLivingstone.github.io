@@ -149,7 +149,7 @@ body.landing-page #tv {
 #selected-reporting,
 #radio,
 #about {
-    padding-top: 153px !important; /* Match to "Selected reporting" menu height */
+    padding-top: 152px !important; /* Match to "Selected reporting" menu height */
     margin-top: 0 !important;
 }
 
