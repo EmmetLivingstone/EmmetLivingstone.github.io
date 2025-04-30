@@ -713,3 +713,7 @@ audio {
         grid-column: 1;
     }
 }
+
+#about .about-content {
+  padding-left: 25px; /* Adjust this value as needed to align with "Selected reporting" */
+}
