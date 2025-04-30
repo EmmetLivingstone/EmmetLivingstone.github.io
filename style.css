@@ -104,7 +104,7 @@ body.landing-page {
 /* Main Content */
 #main-content {
     margin-left: 180px;
-    padding: 0 40px 40px 40px;
+    padding: 0 40px 40px 15px;
     min-height: 100vh;
     background: #f0f0f0;
     position: relative;
